@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  get "/one_recipe", controller: "recipes", action: "one_recipe"
+
+  get "/recipes" => "recipes#index" #RESTful conventions
+  # get "/one_recipe", controller: "recipes", action: "one_recipe"
+  get "/recipes/:id" => "recipes#show"
 end

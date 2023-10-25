@@ -1,6 +1,11 @@
 class RecipesController < ApplicationController
-  def one_recipe
-    recipe = Recipe.second
+  def index
+    @recipes = Recipe.all
+    render json: @recipes
+  end
+
+  def show
+    recipe = Recipe.find_by(id: params["id"])
     render json: {
       id: recipe.id,
       chef: recipe.chef,
