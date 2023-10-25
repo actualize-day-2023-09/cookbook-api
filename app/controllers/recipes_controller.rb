@@ -11,12 +11,12 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(
-      title: "Mud Pie",
-      chef: "Peter Jang",
-      image_url: "image.png",
-      prep_time: 10,
-      ingredients: "mud",
-      directions: "bake the mud. Enjoy!",
+      title: params["title"],
+      chef: params["chef"],
+      image_url: params["image_url"],
+      prep_time: params["prep_time"],
+      ingredients: params["ingredients"],
+      directions: params["directions"],
     )
     @recipe.save
     render :show
