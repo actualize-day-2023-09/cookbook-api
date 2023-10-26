@@ -2,6 +2,7 @@ json.id recipe.id
 json.title recipe.title
 json.chef recipe.chef
 json.prep_time recipe.prep_time
+json.friendly_prep_time recipe.friendly_prep_time
 json.image_url recipe.image_url
 json.ingredients recipe.ingredients
 json.ingredients_list recipe.ingredients_list
