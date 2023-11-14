@@ -14,12 +14,23 @@ class RecipesControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
 
     data = JSON.parse(response.body)
-    assert_equal ["id", "title", "chef", "prep_time", "friendly_prep_time", "image_url", "ingredients", "ingredients_list", "directions", "directions_list", "created_at", "friendly_created_at", "updated_at"], data.keys
+    assert_equal ["id", "user_id", "title", "chef", "prep_time", "friendly_prep_time", "image_url", "ingredients", "ingredients_list", "directions", "directions_list", "created_at", "friendly_created_at", "updated_at"], data.keys
   end
 
   test "create" do
     assert_difference "Recipe.count", 1 do
-      post "/recipes.json", params: { title: "Cake", chef: "Jay", image_url: "test.jpg", prep_time: 10, ingredients: "Batter", directions: "Bake" }
+      # creates test instance of user
+      post "/users.json", params: { name: "Test", email: "test@test.com", password: "password", password_confirmation: "password" }
+      # logs in test instance of user
+      post "/sessions.json", params: { email: "test@test.com", password: "password" }
+      # recieve the JWT
+      data = JSON.parse(response.body)
+      jwt = data["jwt"]
+
+      post "/recipes.json", params: { title: "Cake", chef: "Jay", image_url: "test.jpg", prep_time: 10, ingredients: "Batter", directions: "Bake" },
+                            # passing in headers with JWT for current_user
+                            headers: { "Authorization" => "Bearer #{jwt}" }
+
       assert_response 200
     end
   end

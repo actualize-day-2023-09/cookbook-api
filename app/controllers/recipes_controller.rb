@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   def index
+    pp current_user
     @recipes = Recipe.all
     render :index
   end
@@ -11,6 +12,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(
+      user_id: current_user.id,
       title: params["title"],
       chef: params["chef"],
       image_url: params["image_url"],

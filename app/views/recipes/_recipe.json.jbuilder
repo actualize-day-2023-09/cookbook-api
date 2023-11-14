@@ -1,4 +1,5 @@
 json.id recipe.id
+json.user_id recipe.user_id
 json.title recipe.title
 json.chef recipe.chef
 json.prep_time recipe.prep_time
